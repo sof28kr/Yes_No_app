@@ -28,7 +28,7 @@ class MyMessageBubble extends StatelessWidget {
             )
             // ctrl+shift+p -> loren ipsun insert a line
             ),
-        const SizedBox(height: 10)
+        const SizedBox(height: 5)
       ],
     );
   }

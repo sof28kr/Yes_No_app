@@ -58,6 +58,7 @@ class _ChatView extends StatelessWidget {
             // llena toda la pantalla
             Expanded(
                 child: ListView.builder(
+                    controller: chatProvider.chatScrollController ,
                     itemCount: chatProvider.messageList.length,
                     itemBuilder: (context, index) {
                       final message = chatProvider.messageList[index];
@@ -69,7 +70,15 @@ class _ChatView extends StatelessWidget {
                     })),
             // el listview optimiza recursos
             // caja de Texto de mensajes
-            MessageFieldBox(),
+            MessageFieldBox(
+
+              // esta seria la opcion larga
+              // onValue: (value) => chatProvider.sendMessage(value),
+
+              // una opcion mas corta seria
+               onValue: chatProvider.sendMessage
+
+            ),
           ],
         ),
       ),
