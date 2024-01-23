@@ -62,10 +62,10 @@ class _ChatView extends StatelessWidget {
                     itemCount: chatProvider.messageList.length,
                     itemBuilder: (context, index) {
                       final message = chatProvider.messageList[index];
-
+                      
                       // condicional que ordena de clasifica de quien son los mensajes
                       return (message.fromWho == FromWho.his)
-                          ? const HisMessageBubble()
+                          ? HisMessageBubble(message : message)
                           : MyMessageBubble(message: message);
                     })),
             // el listview optimiza recursos

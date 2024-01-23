@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class HisMessageBubble extends StatelessWidget {
-  const HisMessageBubble({super.key});
+  const HisMessageBubble({
+    super.key, 
+    required this.message
+    });
+
+  final Message message;
 
   @override
   Widget build(BuildContext context) {
-
     //llama el color del tema
     final colors = Theme.of(context).colorScheme;
 
@@ -16,16 +21,17 @@ class HisMessageBubble extends StatelessWidget {
             decoration: BoxDecoration(
                 color: colors.secondary,
                 borderRadius: BorderRadius.circular(20)),
-            child: const Padding(
+            child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text('Hola Mundo', style: TextStyle(color: Colors.white)),
+              child: Text(
+                message.text,
+                style: TextStyle(color: Colors.white)
+                ),
             )
             // ctrl+shift+p -> loren ipsun insert a line
             ),
         const SizedBox(height: 50),
-
-        const _ImageBubble(),
-
+        _ImageBubble(message.imageUrl!),
         const SizedBox(
           height: 10,
         )
@@ -35,8 +41,13 @@ class HisMessageBubble extends StatelessWidget {
 }
 
 class _ImageBubble extends StatelessWidget {
-  const _ImageBubble({super.key});
+  
+  final String imageUrl;
 
+  const _ImageBubble(this.imageUrl);
+ 
+ 
+ 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -46,7 +57,7 @@ class _ImageBubble extends StatelessWidget {
     return ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Image.network(
-          'https://yesno.wtf/assets/no/22-8806dbccb1edf544723b7f095ff722e8.gif',
+          imageUrl,
           width: size.width * 0.7,
           height: 200,
           fit: BoxFit.cover,
@@ -56,9 +67,9 @@ class _ImageBubble extends StatelessWidget {
             if (loadingProgress == null) return child;
             //si no se termina de cargar la imagen
             return Container(
-              width: size.width*0.7,
+              width: size.width * 0.7,
               height: 150,
-              padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: const Text('Mi amor esta enviando una imagen'),
             );
           },
